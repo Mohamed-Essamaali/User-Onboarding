@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import * as yup from 'yup';
 import Input from './Input';
 import axios from 'axios';
@@ -7,6 +7,7 @@ import './Form.css';
 
 
 const DataForm = (props)=>{
+    const[users,setUsers] = useState([]); 
     const[post,setPost]=useState([])
 
     const defaultState = {
@@ -18,6 +19,7 @@ const DataForm = (props)=>{
 
     const[formState, setFormState]= useState(defaultState);
     const[errors,setErrors]= useState({...defaultState,terms:''})
+    const[buttonDisabled,setButtonDisabled] = useState(true);
 
     const inputChange=e=>{
         e.persist();
@@ -34,9 +36,12 @@ const DataForm = (props)=>{
         name: yup.string().required('please enter a name'),
         email:yup.string().email('enter a valide email').required('please enter an email'),
         password: yup.string().required('please enter a password'),
-        terms: yup.boolean().oneOf([true], "please agree to terms of use")
+        terms: yup.boolean().oneOf([true], "please agree to terms of use"),
 
     })
+    useEffect(()=>{
+        formSchema.isValid(formState).then(valid=>setButtonDisabled(!valid))
+    },[formState])
 
 // validate changes 
 const validateChange = e =>{
@@ -70,7 +75,8 @@ const submitForm= e=>{
 
         })
         .catch(err=>{
-           console.log( 'something wrong')
+           
+            console.log( 'something wrong')
         })
     })
 }
@@ -111,11 +117,12 @@ return(
             label='Terms'
             errors={errors}
          />
-         <button type='submit'>Submit</button>
+         <button disabled ={buttonDisabled} type='submit'>Submit</button>
             
         </form>
         { /* displaying our post request data */  }
-<pre>{JSON.stringify(post, null, 2)}</pre>
+
+        <pre>{JSON.stringify(post, null, 2)}</pre>
 
     </div>
 

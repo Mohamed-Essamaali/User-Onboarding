@@ -17,7 +17,8 @@ form {
   button{
       width:15%;
       padding:1%;
-      border-radius:5px
+      border-radius:5px;
+      margin:0 40%
 
   }
  .error{
