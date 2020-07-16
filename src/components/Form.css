@@ -1,0 +1,29 @@
+form {
+    display:flex;
+    flex-direction: column;
+    justify-content: center;
+    width : 90%;
+    margin: 1% 2.5%;
+    padding: 1% 2.5%
+   
+  }
+  Input {
+    display: inline;
+    /* justify-content: start; */
+    width:25%;
+    padding:1%;
+    margin:1% 2%;
+  }
+  button{
+      width:15%;
+      padding:1%;
+      border-radius:5px
+
+  }
+ .error{
+     padding:0;
+     margin-top:0;
+     margin-bottom:3%;
+     color:red;
+     font-size:1.2rem
+ }
