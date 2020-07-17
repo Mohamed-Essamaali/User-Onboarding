@@ -8,7 +8,7 @@ import './Form.css';
 
 const DataForm = (props)=>{
     const[users,setUsers] = useState([]); 
-    const[post,setPost]=useState([])
+
 
     const defaultState = {
         name:'',
@@ -18,17 +18,18 @@ const DataForm = (props)=>{
      }
 
     const[formState, setFormState]= useState(defaultState);
-    const[errors,setErrors]= useState({...defaultState,terms:''})
+    const[errors,setErrors]= useState({...defaultState})
     const[buttonDisabled,setButtonDisabled] = useState(true);
 
     const inputChange=e=>{
         e.persist();
-        const value =e.target.type==='checkbox' ? e.target.checked : e.target.value
-        // console.log(formState)
+        validateChange(e);
+        let value =e.target.type==='checkbox' ? e.target.checked : e.target.value
+        console.log(formState)
         console.log(errors)
         setFormState({...formState,
             [e.target.name]:value})
-            validateChange(e);
+            
            
     }
     // create schema form for validation
@@ -45,9 +46,10 @@ const DataForm = (props)=>{
 
 // validate changes 
 const validateChange = e =>{
+    let value =e.target.type==='checkbox' ? e.target.checked : e.target.value
     yup
         .reach(formSchema,e.target.name)
-        .validate(e.target.value)
+        .validate(value)
         .then(valid =>{
             setErrors({...errors,
                 [e.target.name]:''})
@@ -59,27 +61,29 @@ const validateChange = e =>{
         })
 }
 //submit form button
-const submitForm= e=>{
+const submitForm= e =>{
     e.preventDefault();
+    console.log('form Submitted');
     axios
     .post("https://reqres.in/api/users", formState)
     .then(res=>{
-        setPost(res.data)
-        console.log('success', post)
+        console.log('success', users)
+        setUsers([...users,res.data])
+        
        //reset form
         setFormState({
             name:'',
             email:'',
             password:'',
-            terms: ''
+            terms: false
 
-        })
+        })})
         .catch(err=>{
            
-            console.log( 'something wrong')
+            console.log( 'something wrong',err)
         })
-    })
-}
+    }
+
 
 return(
     <div className= "user-form">
@@ -122,7 +126,10 @@ return(
         </form>
         { /* displaying our post request data */  }
 
-        <pre>{JSON.stringify(post, null, 2)}</pre>
+        <pre>
+           {JSON.stringify(users, null, 2)}
+            
+            </pre>
 
     </div>
 
