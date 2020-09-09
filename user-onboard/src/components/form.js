@@ -25,9 +25,9 @@ const Form = props=>{
 
     }
     const formSchema = yup.object().shape({
-        name:yup.string().required('Name is a required field'),
+        name:yup.string().required('Name is a required field').min(4,'Minimum four characters'),
         email: yup.string().email('Must enter a valid email').required('Must include email address'),
-        password: yup.string().min(6,'password minimum 6 charaters').required('must provide a password'),
+        password: yup.string().required('must provide a password').min(6,'password minimum 6 charaters'),
         terms: yup.boolean().oneOf([true]).required('Please agree to terms of use')
     })
 
@@ -77,12 +77,16 @@ const Form = props=>{
             <form onSubmit={submitForm}>
                 <label htmlFor='name'>Name</label>
                 <input id='name' type='string' name='name' value={formData.name} onChange={handleChange}/>
+                {errors.name.length>0?<p className='error'>{errors.name}</p>:null}
                 <label htmlFor='email'>Email</label>
                 <input id='email' type='email' name='email' value={formData.email} onChange={handleChange}/>
+                {errors.email.length>0?<p className='error'>{errors.email}</p>:null}
                 <label htmlFor='password'>Password</label>
                 <input id='password' type='password' name='password' value={formData.password} onChange={handleChange}/>
+                {errors.password.length>0?<p className='error'>{errors.password}</p>:null}
                 <label htmlFor = 'terms'>Agree the terms</label>
                 <input type='checkbox' id='terms' name='terms' checked={formData.terms} onChange={handleChange}/>
+                {errors.terms.length>0? <p className='error'>{errors.terms}</p> :null }
                 <button disabled = {buttonDisabled} type='submit'>Submit!</button>
             </form>
 
