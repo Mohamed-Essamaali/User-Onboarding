@@ -8,10 +8,10 @@ const Users = props=>{
         <div >
             {
                 props.users.map(user=>(
+                       
                     
-                    
-                    <div>
-
+                    <div key={user.id}>
+                        {console.log('user in users ',user)}
                         <h3>Name: { user.name}</h3>
                         <p>Email:{ user.email}</p>
                         <p>Password:{ user.password}</p>

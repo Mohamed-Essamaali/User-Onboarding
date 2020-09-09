@@ -6,6 +6,7 @@ import Users from './users'
 
 const Form = props=>{
     const[formData,setFormData] = useState({
+      
         name:'',
         email:'',
         password:'',
@@ -21,7 +22,7 @@ const Form = props=>{
     //     e.persist allows us to use the synthetic event in an async manner (inside of validateChange fn).
     // We need to be able to use it after the form validation 
         event.persist();
-        let newData = event.target.type ==='checkbox'? event.target.checked : event.target.value;
+        let newData = event.target.type ==='checkbox'? event.target.checked : event.target.value
        
         validate(event)
         setFormData({...formData,[event.target.name]:newData})
