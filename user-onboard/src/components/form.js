@@ -27,8 +27,6 @@ const Form = props=>{
         validate(event)
         setFormData({...formData,[event.target.name]:newData})
 
-        console.log(formData)
-       
 
     }
     const formSchema = yup.object().shape({
@@ -102,20 +100,20 @@ const Form = props=>{
                
                 
                     <label  htmlFor='name'>Name</label>
-                    <input id='name' type='string' name='name' value={formData.name} onChange={handleChange}/>
+                    <input data-cy = 'name' id='name' type='string' name='name' value={formData.name} onChange={handleChange}/>
                     {errors.name.length>0?<p className='error'>{errors.name}</p>:null}
                
                     <label htmlFor='email'>Email</label>
-                    <input id='email' type='email' name='email' value={formData.email} onChange={handleChange}/>
-                    {errors.email.length>0?<p className='error'>{errors.email}</p>:null}
+                    <input data-cy='email' id='email' type='email' name='email' value={formData.email} onChange={handleChange}/>
+                    {errors.email.length>0?<p data-cy='email-error' className='error'>{errors.email}</p>:null}
                
                     <label htmlFor='password'>Password</label>
-                    <input id='password' type='password' name='password' value={formData.password} onChange={handleChange}/>
+                    <input data-cy='password' id='password' type='password' name='password' value={formData.password} onChange={handleChange}/>
                     {errors.password.length>0?<p className='error'>{errors.password}</p>:null}
                     <div className='terms-container'>
                         <div className='terms'>
                             <label htmlFor = 'terms'>Agree the terms</label>
-                            <input  type='checkbox' id='terms' name='terms' value={formData.terms?'agreed':'disagree'} checked={formData.terms} onChange={handleChange}/>
+                            <input data-cy='terms' type='checkbox' id='terms' name='terms' value={formData.terms?'agreed':'disagree'} checked={formData.terms} onChange={handleChange}/>
                         </div>
                      
                         {<p className='error'>{errors.terms}</p> }
@@ -123,7 +121,7 @@ const Form = props=>{
                   
               
                     <label htmlFor='role'>Role</label>
-                    <select id='role' name='role' onChange={handleChange}>
+                    <select data-cy='role' id='role' name='role' onChange={handleChange}>
                         <option value='frontEnd'>Front End Engineer </option>
                         <option value='backEnd'>Back End Engineer </option>
                         <option value='designer'>Designer </option>
@@ -131,9 +129,12 @@ const Form = props=>{
              
 
 
-                    <button disabled = {buttonDisabled} type='submit'>Submit!</button>
+                    <button data-cy='submit' disabled = {buttonDisabled} type='submit'>Submit!</button>
             </form>
-            <Users users={users}/>
+           
+                <Users users={users}/>
+           
+            
 
         </div>
     )

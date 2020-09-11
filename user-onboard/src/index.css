@@ -73,3 +73,6 @@ h1{
 .App {
   background: #9a9abd;
 }
+button:disabled{
+  background: #dddddd;
+}
