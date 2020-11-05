@@ -98,35 +98,38 @@ const Form = props=>{
         <div className='form'>
             <form onSubmit={submitForm} >
                
-                
+            <div>
                     <label  htmlFor='name'>Name</label>
                     <input data-cy = 'name' id='name' type='string' name='name' value={formData.name} onChange={handleChange}/>
                     {errors.name.length>0?<p className='error'>{errors.name}</p>:null}
-               
+                </div>
+                <div>
                     <label htmlFor='email'>Email</label>
                     <input data-cy='email' id='email' type='email' name='email' value={formData.email} onChange={handleChange}/>
                     {errors.email.length>0?<p data-cy='email-error' className='error'>{errors.email}</p>:null}
-               
+                    </div>
+                    <div>
                     <label htmlFor='password'>Password</label>
                     <input data-cy='password' id='password' type='password' name='password' value={formData.password} onChange={handleChange}/>
                     {errors.password.length>0?<p className='error'>{errors.password}</p>:null}
+                    </div>
                     <div className='terms-container'>
-                        <div className='terms'>
+                       
                             <label htmlFor = 'terms'>Agree the terms</label>
                             <input data-cy='terms' type='checkbox' id='terms' name='terms' value={formData.terms?'agreed':'disagree'} checked={formData.terms} onChange={handleChange}/>
-                        </div>
+                        
                      
                         {<p className='error'>{errors.terms}</p> }
                     </div>
                   
-              
+                    <div>
                     <label htmlFor='role'>Role</label>
                     <select data-cy='role' id='role' name='role' onChange={handleChange}>
                         <option value='frontEnd'>Front End Engineer </option>
                         <option value='backEnd'>Back End Engineer </option>
                         <option value='designer'>Designer </option>
                     </select>
-             
+                    </div>
 
 
                     <button data-cy='submit' disabled = {buttonDisabled} type='submit'>Submit!</button>

@@ -5,7 +5,7 @@ const Users = props=>{
 
 
     return (
-        <div >
+        <div className='users'>
             {
                 props.users.map(user=>(
                        
@@ -14,8 +14,6 @@ const Users = props=>{
                         {console.log('user in users ',user)}
                         <h3>Name: { user.name}</h3>
                         <p>Email:{ user.email}</p>
-                        <p>Password:{ user.password}</p>
-                        <p>Terms:{ user.terms}</p>
                         <p>Role:{ user.role}</p>
                     </div>
                     ))
